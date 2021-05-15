@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title><%=prod.name%></title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    </head>
+    <style>
+#abcd {
+  display: flex!important;
+  justify-content: center!important;
+  align-items: center!important;
+}
+#abcde {
+  width: 80%;
+}
+    </style>
+<body>
+    <main class="containerProduct" >
+
+        <div class="left-column" id = "abcd">
+          <img  src="/img/<%=prod.image%>" id = "abcde" alt="<%=prod.name%>">
+          
+        </div>
+  
+
+        <!-- Right Column -->
+        <div class="right-column">
+  
+          <!-- Product Description -->
+          <div class="product-description mt-6">
+            <span><%=prod.category%></span>
+            <h1><%=prod.name%></h1>
+            <p><%=prod.description%></p>
+          </div>
+  
+          <div class="product-configuration">
+  
+
+  
+            <!-- Size-->
+            <%if(prod.size != "NA"){
+              var sizeSpl = prod.size.split(":")
+              %>
+              <div class="size-config">
+                <span>Size</span>
+    
+                <div class="size-choose">
+                  <%for(a in sizeSpl){
+                  if(a==0)
+                  {
+                    session.size = sizeSpl[a]
+                    %>
+                    <input type="radio" id=<%=sizeSpl[a]%> class = "sizeRadio" name="size" value="<%=sizeSpl[a]%>" checked>
+                    <label for=<%=sizeSpl[a]%>><%=sizeSpl[a]%></label>
+                  <%
+                    
+                }else{
+                  %>
+                    <input type="radio" id=<%=sizeSpl[a]%> class = "sizeRadio" name="size" value="<%=sizeSpl[a]%>" >
+                    <label for=<%=sizeSpl[a]%>><%=sizeSpl[a]%></label>
+                    
+                  <%}}%>
+                  
+                </div>
+    
+              </div>
+            <%} %>
+            
+          </div>
+          <i class="fa fa-inr" aria-hidden="true"></i><i class="fa fa-inr" aria-hidden="true"></i><i class="fa fa-inr" aria-hidden="true"></i>
+          <!-- Product Pricing -->
+          <div class="product-price">
+            <span><i><img class= "inline" src="/img/rupee.png"/></i>
+              <%=prod.price%></span>
+            <a data-product="<%= JSON.stringify(prod) %>" class="cart-btn add-to-cart">Add to cart</a>
+          </div>
+        </div>
+      </main>
+  
+      <!-- Scripts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+  
+</body>

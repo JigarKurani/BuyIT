@@ -1,0 +1,83 @@
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.css" integrity="sha512-4a1cMhe/aUH16AEYAveWIJFFyebDjy5LQXr/J/08dc0btKQynlrwcmLrij0Hje8EWF6ToHCEAllhvGYaZqm+OA==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.js" integrity="sha512-/jeu5pizOsnKAR+vn28EbhN5jDSPTTfRzlHZh8qSqB77ckQd3cOyzCG9zo20+O7ZOywiguSe+0ud+8HQMgHH9A==" crossorigin="anonymous"></script>
+    
+  </head>
+  
+  <section class="hero py-16">
+
+    <div>
+       <center><img src="/img/mainBg.jpg" alt=""></center>
+    </div>
+  </section>
+  <section class="container mx-auto py-8">
+    <h1 class="text-xl font-bold mb-8" style = "font-size: 36px;">Products</h1>
+    <% 
+        categories.forEach(c => { 
+            %>
+    <div style="text-align:left ;font-size: 34px " class=" mb-6"><%=c.catName%>:</div>
+    <div class="slider owl-carousel mx-auto">
+        <%
+            products.forEach(product => {
+                if(c.code == product.category){
+                %>
+        <div class="card bg-white shadow-md rounded ">
+            <div class="img">
+                <img src="/img/<%=product.image%>" alt="Product">
+            </div>
+            <div class="content">
+            <a href = "showProduct?id=<%=product._id%>">
+                <div class="productDesc title"" >
+                    <u><%=product.name%></u>
+                </div>
+            </a>
+            </div>
+            
+                <div class="sub-title">
+                    Rs. <%=product.price%><br><br>
+                </div>
+                <div class = "btn">
+
+  </div>
+
+           
+        </div>
+        <%  }})
+            %>
+    </div>
+    <%
+        }) %> 
+    
+    <script>
+   
+        $(".slider").owlCarousel({
+          loop: true,
+          autoplay: true,
+          autoplayTimeout: 5000, //2000ms = 2s;
+          autoplayHoverPause: true,
+          items: 5,
+          responsiveClass:true,
+            responsive:{
+        0:{
+            items:1,
+            
+        },
+        600:{
+            items:3,
+            nav:false
+        },
+        1000:{
+            items:5,
+            nav:false,
+            loop:true
+        }
+    }
+        });
+    </script>
+  
+  </section>
+  
+  

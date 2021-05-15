@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis</title>
+
+</head>
+<body>
+    
+    <canvas id="myChart"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+
+
+    var a = <%-JSON.stringify(product)%>;
+    var b = JSON.parse(a)
+    let i;
+    labels = []
+    data1 = []
+    data2 = []
+    for (i = 0; i < b.length; i++) {
+        labels[i] = b[i].name
+        data1[i] = b[i].bought
+        data2[i] = b[i].hits
+    }
+
+    var myChart = new Chart(ctx, {
+        
+        data: {
+            labels: labels,
+            datasets: [{
+                type: 'bar',
+                label: 'Sales',
+                data: data1,
+                backgroundColor: 'black',
+                borderColor: 'blue',
+                
+                borderWidth: 1,
+                barPercentage: 0.5,
+                base: 0
+            },
+            {
+                type: 'line',
+                label: 'Hits',
+                data: data2,
+                backgroundColor: 'cyan',
+                borderColor: 'black',
+                borderWidth: 1,
+                barPercentage: 0.5,
+                base: 0
+            }
+        ],
+            
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+        }]
+    }
+}
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<head>
+    <style>
+         html,body {
+            padding:0;
+            margin:0;
+            height:100%;
+            min-height:100%;
+        }
+
+        #tl,#tr,#bl,#br { width: 50%; height: 50%; float: left; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="tl">
+        <h1 class=" text-center  text-xl">   Per day sales </h1> 
+        <canvas id="day"></canvas>
+    </div>
+    <div id="tr" >
+        <h1 class=" text-center text-xl">  Total orders placed </h1> 
+        <h1 class=  "relative mx-auto  top-1/3 left-1/2 text-blue-500">
+           <%=noOfOrders%>
+        </h1>
+       
+    </div>
+    <div id="bl">
+        <h1 class=" text-center text-xl">Total Revenue generated : </h1>
+        <h1 class=  "top-3/4 text-blue-500 text-center">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            Rs. <%=total%>
+        </h1>
+        
+    </div>
+    <div id="br" >
+        <h1 class=" text-center text-xl"> Category-wise Sales </h1> 
+        <canvas id="cat"></canvas>
+
+    </div>
+    <script>
+    var ctx = document.getElementById('day').getContext('2d');
+    var catChart = document.getElementById('cat').getContext('2d');
+
+    var a = <%-JSON.stringify(dateWise)%>;
+    var b = JSON.parse(a)
+    var c = <%-JSON.stringify(catWise)%>;
+    var d = JSON.parse(c)
+    let i;
+    labels = []
+    data = []
+    labelsCat = []
+    dataCat = []
+    for (i = 0; i < b.length; i++) {
+        labels[i] = b[i]._id
+        data[i] = b[i].sum
+    }
+    for (i = 0; i < d.length; i++) {
+        labelsCat[i] = d[i]._id[0].catName
+        dataCat[i] = d[i].count
+    }
+   
+    var myChart = new Chart(ctx, {
+        
+        data: {
+            labels: labels,
+            datasets: [{
+                type: 'bar',
+                label: 'Daily sales',
+                data: data,
+                backgroundColor: 'black',
+                borderColor: 'blue',
+                
+                borderWidth: 1,
+                barPercentage: 0.5,
+                base: 0
+            }
+        ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+        }]
+    }
+}
+    });
+
+    var myChart2 = new Chart(catChart, {
+        
+        data: {
+            labels: labelsCat,
+            datasets: [{
+                type: 'bar',
+                label: 'Category-wise sales',
+                data: dataCat,
+                backgroundColor: 'black',
+                borderColor: 'blue',
+                borderWidth: 1,
+                barPercentage: 0.5,
+                base: 0
+            }
+        ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+        }]
+    }
+}
+    });
+
+    </script>
+</body>

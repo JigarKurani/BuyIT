@@ -1,0 +1,44 @@
+<section class="login flex justify-center pt-24">
+
+    <div class="w-full max-w-sm">
+        <form action="/register" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <% if (messages.error) { %>
+            <span class="text-red-500 text-sm"><%= messages.error %> </span>
+          <% } %> 
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" for="username">
+                  Name
+                </label>
+                <input name="name" value="<%= messages.name %>" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" 
+                id="username" type="text" placeholder="Enter your name" pattern="[a-zA-Z]{5,}">
+              </div>
+            <div class="mb-4">
+              <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" for="username">
+                Email
+              </label>
+              <input name="email" value="<%= messages.email %>" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="username" type="email" placeholder="Enter your email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            </div>
+            <div class="mb-6">
+              <label class="block text-grey-700 text-sm font-bold mb-2" for="password">
+                Password
+              </label>
+              <input 
+              name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700 mb-3
+                leading-tight focus:outline-none focus:shadow-outline" 
+                id="password" type="password" placeholder="******************" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
+              
+            </div>
+            <div class="flex items-center justify-between ">
+        
+              <button class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded
+              focus:outline-none focus:shadow-outline" type="submit">
+                Sign Up
+              </button>
+              <a class="inline-block align-baseline font-bold text-sm" href="/login">
+                Already have an account?
+              </a>
+            </div>
+        </form>
+    </div>
+    
+    </section>

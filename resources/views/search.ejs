@@ -1,0 +1,45 @@
+
+    <h1 class ="font-extrabold text-2xl px-6 mt-10">Search results for <%=search%> : </h1>
+    <div class="container-fluid mx-auto flex items-center py-2 justify-end">
+        <h1>Sort by : </h1>
+        <form action="/search">
+            <input type="hidden" id = "key" value='<%=search%>' name = "key">
+            <select onchange="this.form.submit()" name="sort" id="sort" class="inline-block appearance-none w-5/9 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline ml-4 mr-4">
+                
+                <option value="featured" >Featured</option>
+                <option value="desc"<%if(sort=='desc'){
+                    %>
+                    selected<%
+                }%>>Price high to low</option>
+                <option value="asc"<%if(sort=='asc'){
+                    %>
+                    selected<%
+                }%>>Price low to high</option>
+            </select>
+        </form>
+    </div>
+    <% 
+        products.forEach(product => { 
+        %>
+        <div class="container mx-auto flex items-center py-4 ">
+            <!-- img -->
+
+            <div >
+                <img src="/img/<%=product.image%>" height="150px" width=" 200px" alt="Product">
+            </div>
+            <!-- product -->
+            <div class="ml-8">
+                <div class="name"  >
+                    <a href = "showProduct?id=<%=product._id%>">
+                        <u><%=product.name%></u> 
+                    </a>
+                </div>
+                <div class="price font-extrabold text-red-700" >
+                    Rs. <%=product.price%>
+                </div>
+            </div>
+            
+        </div>
+        <%
+        })
+    %>
