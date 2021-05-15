@@ -9,19 +9,19 @@
       
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" for="fname" >Product Name</label>
 
-          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="pname" name="pname" required>
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="pname" name="pname" pattern="[a-zA-Z ]{0,10}" required>
 
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Price</label>
 
-          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="price" name="price" required>
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="price" name="price" pattern="[0-9]{0,10}" required>
 
-          <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Size</label>
+          <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Size(Seperated by ':')</label>
  
-          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="size" name="size" required>
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="size" name="size" pattern="[a-zA-Z:]{0,10}" required>
  
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Category</label>
  
-          <select class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="cat" name="cat" required>
+          <select class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="cat" name="cat"required>
           <% 
             category.forEach(c => { 
           %>
@@ -34,11 +34,11 @@
 
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Image</label>
    
-          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="image" name="image" required> 
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="image" name="image" pattern="[a-zA-Z0-9 ]{0,25}" required> 
       
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Description</label>
 
-          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="desc" name="desc" required>
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="desc" name="desc"pattern="[a-zA-Z0-9 ]{0,60}" required>
           <div class="text-center">
             <br>
           <input type="submit" class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value= "Add Product">

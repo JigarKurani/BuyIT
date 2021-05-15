@@ -42,7 +42,6 @@ function updateCart(product) {
             timeout: 1000,
             progressBar: false,
             text:"Item added To Cart ",
-            
 
         }).show();
     }).catch(err =>{
@@ -184,6 +183,4 @@ hamburger.addEventListener('click', function() {
         bars[2].style.transform = 'rotate(0deg)'
         isActive = false
     }
-
-
 })
