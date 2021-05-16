@@ -863,3 +863,8 @@ section.status {
 .size-choose input[type=radio]:checked + label {
   border: solid 2px #85b3d1ff;
 }
+
+.er-pg {
+  text-align: center;
+  font-size: 200%;
+}

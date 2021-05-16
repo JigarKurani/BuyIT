@@ -585,3 +585,7 @@ section.status {
         .size-choose input[type="radio"]:checked + label {
           border: solid 2px $primary-hover;
         }
+        .er-pg {
+          text-align: center;
+          font-size: 200%;
+      }
