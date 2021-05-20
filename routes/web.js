@@ -60,6 +60,7 @@ function initRoutes(app) {
     app.get("/admin/products/delete", admin, adminController().delete)
     
     app.get("/admin/products", admin, adminController().products)
+    app.post("/admin/products", admin, adminController().products)
     app.get("/admin/addCat", admin, adminController().addCatPage)
     app.get("/admin/addImage",admin, (req,res)=>{
         res.render('admin/addImage')

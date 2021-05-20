@@ -12,8 +12,14 @@ function adminHomeControl(){
 
         },
         products(req,res){
-            Product.find({},{name:1,image:1,price:1,category:1,size:1}).then(function(products){
-                res.render('admin/products',{products:products})
+            const page = req.body.page || 1;
+            const options = {
+                page:page
+            };
+            //{},{name:1,image:1,price:1,category:1,size:1},
+            Product.paginate({},options,).then(function(products){
+                console.log(products)
+                res.render('admin/products',{products:products.docs,pages:products.pages,page:page})
             })
             
         },
@@ -24,6 +30,7 @@ function adminHomeControl(){
             })
         },
         editPage(req,res){
+            Product.plugin()
             Product.find({_id:req.query.id},{name:1,image:1,price:1,category:1,size:1}).then(function (prod) {
                 Category.find().then(function (cat) {
                 res.render('admin/editProduct',{product:prod[0],category:cat})
