@@ -5,8 +5,13 @@
 <br>
 <br>
 
-    <form action="/admin/addPage/add" method="post" id = "formAdd" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/12	 mx-auto " >
-      
+    <form action="/admin/addPage/add" enctype="multipart/form-data" method="post" id = "formAdd" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/12	 mx-auto " >
+      <% if (messages.success) { %>
+        <span class="text-blue-500 text-sm"><%= messages.success %> </span> <br>
+      <% }
+      else if (messages.error) { %>
+        <span class="text-red-500 text-sm"><%= messages.error %> </span> <br>
+      <% } %>
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" for="fname" >Product Name</label>
 
           <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="pname" name="pname" pattern="[a-zA-Z ]{0,10}" required>
@@ -33,8 +38,8 @@
           </select>
 
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Image</label>
-   
-          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="image" name="image" pattern="[a-zA-Z0-9 ]{0,25}" required> 
+          
+          <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="image" name="imageUpload"  required> 
       
           <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Description</label>
 

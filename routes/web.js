@@ -12,22 +12,21 @@ const guest = require("../app/http/middleware/guest")
 const auth = require("../app/http/middleware/auth")
 const admin = require("../app/http/middleware/admin")
 const adminHome = require("../app/http/middleware/adminHome")
-function addImage(req,res)
-        {
-            const storage = multer.diskStorage(
-                {
-                destination:'././public/img',
-                filename : function(req,file, cb)
-                {
-                    cb(null,file.originalname)
-                
-                }
-            });
-            multer({
-                storage:storage
-            }).single('image');
+        
+const storage = multer.diskStorage(
+{
+    destination:'././public/img',
+    filename : function(req,file, cb)
+    {
+        cb(null,file.originalname)
+
+    }
+    });
+    var upload = multer({
+    storage:storage
+    });
             
-        }
+        
 function initRoutes(app) {
     app.get("/",adminHome, homeController().index)
     app.get("/search/",adminHome, homeController().search)
@@ -53,9 +52,19 @@ function initRoutes(app) {
     app.get("/admin/addPage", admin, adminController().addProductPage)
     app.get("/admin/orders", admin, adminOrderController().index)
     app.post("/admin/order/status", admin, statusController().update)
-    app.post("/admin/addPage/add", admin, adminController().addProduct)
-    app.get("/admin/addCat", admin, adminController().addCatPage)
+    app.post("/admin/addPage/add", admin, upload.single('imageUpload'),(req,res,next)=>{
+        adminController().addProduct(req,res)
+    })
+    app.get("/admin/products/edit", admin, adminController().editPage)
+    app.post("/admin/products/edit", admin, adminController().edit)
+    app.get("/admin/products/delete", admin, adminController().delete)
     
+    app.get("/admin/products", admin, adminController().products)
+    app.get("/admin/addCat", admin, adminController().addCatPage)
+    app.get("/admin/addImage",admin, (req,res)=>{
+        res.render('admin/addImage')
+    })
+
     app.post("/admin/addCat/add", admin,adminController().addCategory)
     app.get("/admin/analysis", admin, adminController().analysis)
     

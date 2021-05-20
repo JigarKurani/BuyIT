@@ -1,0 +1,53 @@
+<head>
+  <title>Edit product</title>
+</head>
+<br>
+<br>
+<br>
+
+    <form action="/admin/products/edit" method="post" id = "formAdd" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/12	 mx-auto " >
+      <% if (messages.success) { %>
+        <span class="text-blue-500 text-xl"><%= messages.success %> </span> <br>
+      <% }
+      else if (messages.error) { %>
+        <span class="text-red-500 text-sm"><%= messages.error %> </span> <br>
+      <% } %>
+      <%
+       
+      %>
+          <input type="hidden" name="id" value = "<%=product._id%>">
+          <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" for="fname" >Product Name</label>
+
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="pname"name="pname"  value = "<%=product.name%>"required>
+
+          <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" ">Price</label>
+
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="price" name="price" pattern="[0-9]{0,10}" value = "<%=product.price%>" required>
+
+          <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Size(Seperated by ':')</label>
+ 
+          <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="size" name="size" pattern="[a-zA-Z: ]{0,}"value = "<%=product.size%>" required>
+ 
+          <label class="block text-grey-darker text-sm font-bold mb-2 leading-tight focus:outline-none focus:shadow-outline" >Category</label>
+ 
+          <select class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" id="cat" name="cat"required>
+          <% 
+            category.forEach(c => { 
+          %>
+          <option value=<%-c.code %> > 
+              <%= c.catName%> 
+          </option>
+          <%
+        })%>
+          </select>
+
+ 
+      
+
+          <div class="text-center">
+            <br>
+          <input type="submit" class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value= "Edit Product">
+          </div>
+
+    </form>
+  

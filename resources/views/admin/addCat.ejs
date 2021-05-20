@@ -1,15 +1,20 @@
 
 
-<form action="/admin/addCat/add" method="post" id = "formAdd" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/12 h-1/2 mx-auto align-middle">
+<form action="/admin/addCat/add"  method="post" id = "formAdd" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-3/12 h-1/2 mx-auto align-middle">
 
-
+  <% if (messages.success) { %>
+    <span class="text-blue-500 text-sm"><%= messages.success %> </span> <br>
+  <% }
+  else if (messages.error) { %>
+    <span class="text-red-500 text-sm"><%= messages.error %> </span> <br>
+  <% } %>
     <label >Category Name</label>
 
-    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" type="text" id="cname" name="cname" pattern="[a-zA-Z ]{0,10}>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" type="text" id="cname" name="cname" pattern="[a-zA-Z ]{0,10}">
 
     <label >Code</label>
 
-    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" type="text" id="ccode" name="ccode" pattern="[a-zA-Z ]{0,10}>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-700" type="text" id="ccode" name="ccode" ">
 
     <div class="text-center">
       <br>

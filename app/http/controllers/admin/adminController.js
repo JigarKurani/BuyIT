@@ -1,8 +1,53 @@
 const Product = require("../../../models/product")
 const Category = require("../../../models/cat")
 const Order = require("../../../models/order")
+const multer = require('multer')
 function adminHomeControl(){
     return{
+        delete(req,res){
+            Product.findOneAndRemove({_id:req.query.id},{}).then(function(prodDel){
+                req.flash("success","deleted")
+                res.redirect('/admin/products')
+            })
+
+        },
+        products(req,res){
+            Product.find({},{name:1,image:1,price:1,category:1,size:1}).then(function(products){
+                res.render('admin/products',{products:products})
+            })
+            
+        },
+        edit(req,res){
+            Product.findOneAndUpdate({_id:req.body.id},{name:req.body.pname,price : req.body.price,size:req.body.size,category:req.body.cat},function(err,updated){
+                req.flash("success","Edited")
+                res.redirect('/admin/products')
+            })
+        },
+        editPage(req,res){
+            Product.find({_id:req.query.id},{name:1,image:1,price:1,category:1,size:1}).then(function (prod) {
+                Category.find().then(function (cat) {
+                res.render('admin/editProduct',{product:prod[0],category:cat})
+            })
+            })
+        },
+        addImage(req,res)
+        {
+            const storage = multer.diskStorage(
+                {
+                    destination:function(req,file, cb){
+                        cb(null,'././public/img')
+                    },
+                    filename : function(req,file, cb)
+                    {
+                        cb(null,file.originalname)
+                    }
+                });
+            const upload = multer({
+                storage:storage
+            }).single('file');
+            return res.redirect('/');
+            
+        },
         index(req, res) {
             let tot = 0
             Order.find({},{totalPrice:1,_id:0}).then(function(sum){
@@ -45,10 +90,9 @@ function adminHomeControl(){
             })
             
         },
-        addProduct(req,res){
-
-            const { pname, price ,image, size,cat,desc } = req.body
-            if(!pname || !price ||!image|| !size|| !cat  ||!desc) {
+        addProduct(req,res){         
+            const { pname, price , size,cat,desc } = req.body
+            if(!pname || !price || !size|| !cat  ||!desc) {
                 req.flash("error", "All fields are required")
                 return res.redirect("/admin/addPage")  
             }
@@ -56,7 +100,7 @@ function adminHomeControl(){
 
             const product = new Product({
                 name : pname,
-                image :image,
+                image :req.file.originalname,
                 price: parseFloat(price),
                 size:size,
                 category:cat,
@@ -65,6 +109,8 @@ function adminHomeControl(){
                 bought:0
             })
             product.save().then(result => {
+                req.flash("success", "Product added")
+
                 return res.redirect("/admin/addPage")
 
             }).catch(err => {
@@ -77,10 +123,9 @@ function adminHomeControl(){
         },
         addCategory(req,res){
             const { cname, ccode } = req.body
-            if(!cname || !ccode ) {
-                
-                console.log("noob")
-                return res.redirect("/admin/addPage")  
+            if(!cname || !ccode ) {                
+                req.flash('error',"All fields are required")
+                return res.redirect("/admin/addCat")  
             }
             //Creating a new order
             const cat = new Category({
